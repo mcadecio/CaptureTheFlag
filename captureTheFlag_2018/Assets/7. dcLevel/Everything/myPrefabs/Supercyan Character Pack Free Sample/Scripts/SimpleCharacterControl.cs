@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
-using UnityStandardAssets.CrossPlatformInput;
 using MySql.Data.MySqlClient;
 using System;
 using UnityEngine.UI;
-using MySql.Data;
-
+using unityChan.CrossPlatformInput;
 
 public class SimpleCharacterControl : MonoBehaviour {
 
@@ -70,17 +67,25 @@ public class SimpleCharacterControl : MonoBehaviour {
     {
         
 
-        string server = "172.31.82.35";
+        string server = "uk-ctf.uksouth.cloudapp.azure.com";
         string database = "capture_flag_game";
         string user = "root";
-        string password = "main_container_pw";
+        string password = "pass";
         string port = "3306";
         string sslM = "none";
         string connectionString = String.Format("server={0};port={1};user id={2}; password={3}; database={4}; SslMode={5}",
             server, port, user, password, database, sslM);
 
         connection = new MySqlConnection(connectionString);
-        connection.Open();
+        try
+        {
+            connection.Open();
+            Debug.Log("Connected to database");
+        }catch(Exception e)
+        {
+            Debug.Log("Exception");
+            Debug.Log(e.Message);
+        }
 
         
         
